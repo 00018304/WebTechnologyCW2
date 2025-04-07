@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title To-Do List App
+    link(rel='stylesheet', href='/styles/style.css')
+  body
+    h1 To-Do List Application
+    form(action='/add', method='POST')
+      input(type='text', name='task', placeholder='New task')
+      button(type='submit') Add Task
+
+    ul
+      each todo in todos
+        li(class=todo.completed ? 'completed' : '')
+          span= todo.task
+          form(action='/edit/' + todo.id, method='POST')
+            input(type='text', name='task', value=todo.task)
+            button(type='submit') Edit
+          a(href='/delete/' + todo.id) Delete
+          footer.footer
+             | This web application was created to fulfill Web Technology module's requirements and does not represent an actual company or services
+        .container
+
+    block content
